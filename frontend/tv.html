@@ -5,127 +5,233 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Midia-indoor</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
+   <style>
+    /* ================================
+       CONFIGURAÇÕES GERAIS
+    ================================= */
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        background: #eef2f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        color: #263238;
+    }
+
+    /* ================================
+       CONTAINER DA TV
+    ================================= */
+
+    .tv-container {
+        display: flex;
+        width: 95vw;
+        height: 90vh;
+        gap: 18px;
+    }
+
+    /* ================================
+       PAINEL ESQUERDO
+    ================================= */
+
+    .left-panel {
+        display: flex;
+        flex-direction: column;
+        width: 35%;
+        gap: 18px;
+    }
+
+    /* ================================
+       CAIXAS
+    ================================= */
+
+    .box {
+        background: #ffffff;
+        border: 1px solid #d9e1e5;
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        box-shadow: 0 4px 15px rgba(38, 50, 56, 0.08);
+    }
+
+    .box-title {
+        color: #234b5c;
+        font-size: 2.2vw;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        letter-spacing: 1px;
+    }
+
+    /* ================================
+       LOCAL / GUICHÊ
+    ================================= */
+
+    .local-box {
+        flex: 1;
+        border-top: 5px solid #5f8f9f;
+    }
+
+    .local-number {
+        color: #315d6d;
+        font-size: 9vw;
+        font-weight: bold;
+        line-height: 1;
+    }
+
+    .local-type {
+        color: #60737c;
+        font-size: 1.8vw;
+        font-weight: 600;
+        margin-top: 6px;
+        text-transform: uppercase;
+    }
+
+    /* ================================
+       HISTÓRICO
+    ================================= */
+
+    .history-box {
+        flex: 1;
+        justify-content: flex-start;
+        align-items: flex-start;
+        border-top: 5px solid #8fa3ab;
+    }
+
+    .history-box .box-title {
+        font-size: 1.8vw;
+        align-self: center;
+        color: #234b5c;
+    }
+
+    #history-list {
+        list-style: none;
+        width: 100%;
+        color: #455a64;
+        font-size: 1.5vw;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    #history-list li {
+        margin-bottom: 8px;
+        border-bottom: 1px solid #dfe5e8;
+        padding: 8px 5px;
+    }
+
+    /* ================================
+       PACIENTE
+    ================================= */
+
+    .patient-box {
+        flex: 3;
+        border-top: 6px solid #315d6d;
+        background: #ffffff;
+    }
+
+    .patient-name {
+        color: #234b5c;
+        font-size: 6.5vw;
+        font-weight: bold;
+        line-height: 1.2;
+        word-break: break-word;
+    }
+
+    /* ================================
+       LOGO
+    ================================= */
+
+    .logo-box {
+        flex: 1;
+        background: #f8fafb;
+        border-top: 5px solid #8fa3ab;
+    }
+
+    .logo-text {
+        color: #315d6d;
+        font-size: 3.5vw;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* ================================
+       ANIMAÇÃO DE CHAMADA
+    ================================= */
+
+    @keyframes flash {
+        0%, 100% {
+            opacity: 1;
         }
 
-        body {
-            background-color: #5c4033;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
+        50% {
+            opacity: 0.35;
         }
+    }
+
+    .flash {
+        animation: flash 0.5s ease 3;
+    }
+
+    /* ================================
+       RESPONSIVIDADE
+    ================================= */
+
+    @media (max-width: 900px) {
 
         .tv-container {
-            display: flex;
-            width: 95vw;
-            height: 90vh;
-            gap: 18px;
+            width: 96vw;
+            height: 92vh;
+            gap: 12px;
         }
 
         .left-panel {
-            display: flex;
-            flex-direction: column;
-            width: 35%;
-            gap: 18px;
+            width: 38%;
+            gap: 12px;
         }
 
         .box {
-            background-color: #63d4f2;
-            border: 6px;
-            border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            padding: 15px;
         }
 
         .box-title {
-            color: #ffff;
-            font-size: 2.2vw;
-            font-weight: bold;
-            text-transform: uppercase;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-            margin-bottom: 12px;
+            font-size: 3vw;
         }
 
-        /*painel esquerdo - local (guiche ou consultorio)*/
-        .local-box {
-            flex: 1;
+        .history-box .box-title {
+            font-size: 2.5vw;
         }
 
-        .local-number {
-            color: #d12c2c;
-            font-size: 9vw;
-            font-weight: bold;
-            line-height: 1;
+        #history-list {
+            font-size: 2vw;
         }
 
         .local-type {
-            color: gray;
-            font-size: 1.8vw;
-            font-weight: bold;
-            margin-top: 6px;
+            font-size: 2.3vw;
+        }
 
-        }
-        .history-box {
-            flex: 1;
-            justify-content: flex-start;
-            align-items:flex-start ;
-        
-        }
-        .history-box .box-title{
-            font-size: 1.8vw;
-            align-self:center;
-        }
-        #history-list {
-            list-style: none;
-            width: 100%;
-            color: red;
-            font-size: 1.5vw;
-            font-weight: bold;
-            text-align: left;
-        }
-        #history-list li{
-            margin-bottom: 8px;
-            border-bottom: 1px solid black;
-            padding-bottom: 5px;
-        }
-        .patient-box{
-            flex: 3;
-            
-        }
         .patient-name {
-            color: red;
-            font-size: 6.5vw;
-            font-weight: bold;
-            line-height: 1.2;
-            word-break: break-word;
+            font-size: 6vw;
         }
-        /*logo */
-        .logo-box{flex: 1; }
-        .logo-text{
-            color: #8c3b7a;
-            font-size: 3.5vw;
-            font-weight: bold;
-            text-transform: uppercase;
+
+        .logo-text {
+            font-size: 3vw;
         }
-        /*Animação de flash quando chama */
-        @keyframes flash{
-            0%, 100%{opacity: 1; }
-            50%{opacity: 0.3;}
-        }
-        .flash{animation: flash 0.5s ease 3;}
-    </style>
+    }
+</style>
 </head>
 <body>
     <!--Estrutura  da tela  da TV criada para exibir o local e o nome do paciente chamado-->
